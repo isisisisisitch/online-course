@@ -1,8 +1,8 @@
 package ca.bytetube.system.controller;
 
 
-import ca.bytetube.system.domain.Test;
-import ca.bytetube.system.service.TestService;
+import ca.bytetube.server.domain.Test;
+import ca.bytetube.server.service.TestService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
