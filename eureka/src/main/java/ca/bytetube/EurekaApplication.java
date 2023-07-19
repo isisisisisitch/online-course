@@ -1,4 +1,4 @@
-package ca.bytetube.course;
+package ca.bytetube;
 
 
 import org.slf4j.Logger;
