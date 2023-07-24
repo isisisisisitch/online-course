@@ -161,9 +161,4 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
-
-    <select id="list" resultType="ca.bytetube.server.domain.Test">
-        select `id`, `name` from `test`
-    </select>
-
 </mapper>
