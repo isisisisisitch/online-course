@@ -81,7 +81,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from test
     where id = #{id,jdbcType=CHAR}
@@ -142,7 +142,7 @@
   <update id="updateByExample" parameterType="map">
     update test
     set id = #{record.id,jdbcType=CHAR},
-      name = #{record.name,jdbcType=VARCHAR}
+    name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -161,4 +161,9 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+  <select id="list" resultType="ca.bytetube.server.domain.Test">
+    select `id`, `name` from `test`
+  </select>
+
 </mapper>
