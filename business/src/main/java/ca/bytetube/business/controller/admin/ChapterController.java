@@ -3,6 +3,7 @@ package ca.bytetube.business.controller.admin;
 import ca.bytetube.server.domain.Chapter;
 import ca.bytetube.server.dto.ChapterDto;
 import ca.bytetube.server.dto.PageDto;
+import ca.bytetube.server.dto.ResponseDto;
 import ca.bytetube.server.service.ChapterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,17 +24,21 @@ public class ChapterController {
     private ChapterService chapterService;
 
     @RequestMapping("/list")
-    public PageDto list(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody PageDto pageDto) {
         LOG.info("pageDto: {}", pageDto);
+        ResponseDto responseDto = new ResponseDto();
         chapterService.list(pageDto);
-        return pageDto;
+        responseDto.setContent(pageDto);
+        return responseDto;
     }
 
     @RequestMapping("/save")
-    public ChapterDto save(@RequestBody ChapterDto chapterDto) {
+    public ResponseDto save(@RequestBody ChapterDto chapterDto) {
         LOG.info("chapterDto: {}", chapterDto);
+        ResponseDto responseDto = new ResponseDto();
         chapterService.save(chapterDto);
-        return chapterDto;
+        responseDto.setContent(chapterDto);
+        return responseDto;
     }
 }
 
