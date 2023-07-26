@@ -10,14 +10,15 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/chapter")
 public class ChapterController {
 
     @Resource
     private ChapterService chapterService;
-    //http://127.0.0.1:9002/business/admin/chapter
-    @RequestMapping("/chapter")
-    public List<ChapterDto> chapter() {
+
+    @RequestMapping("/list")
+    public List<ChapterDto> list() {
         return chapterService.list();
     }
 }
+
