@@ -8,6 +8,9 @@ create table `chapter`
 ) engine = innodb
   default charset = utf8mb4 comment ='chapter';
 
+insert into `chapter` (id, course_id, name) values ('00000000', '00000000', 'testChapter1');
+insert into `chapter` (id, course_id, name) values ('00000001', '00000000', 'testChapter2');
+
 # ---------------------- 测试
 
 drop table if exists `test`;
