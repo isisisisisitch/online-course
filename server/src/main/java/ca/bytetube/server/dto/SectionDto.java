@@ -1,27 +1,66 @@
 package ca.bytetube.server.dto;
 
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class SectionDto {
+
+    /**
+     * ID
+     */
     private String id;
 
+    /**
+     * 标题
+     */
     private String title;
 
+    /**
+     * 课程|course.id
+     */
     private String courseId;
 
+    /**
+     * 大章|chapter.id
+     */
     private String chapterId;
 
+    /**
+     * 视频
+     */
     private String video;
 
+    /**
+     * 时长|单位秒
+     */
     private Integer time;
 
+    /**
+     * 收费|C 收费；F 免费
+     */
     private String charge;
 
+    /**
+     * 顺序
+     */
     private Integer sort;
 
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createdAt;
 
+    /**
+     * 修改时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updatedAt;
+
+    /**
+     * VOD|阿里云VOD
+     */
+    private String vod;
 
     public String getId() {
         return id;
@@ -103,6 +142,15 @@ public class SectionDto {
         this.updatedAt = updatedAt;
     }
 
+    public String getVod() {
+        return vod;
+    }
+
+    public void setVod(String vod) {
+        this.vod = vod;
+    }
+
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -119,7 +167,9 @@ public class SectionDto {
         sb.append(", sort=").append(sort);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", vod=").append(vod);
         sb.append("]");
         return sb.toString();
     }
+
 }
