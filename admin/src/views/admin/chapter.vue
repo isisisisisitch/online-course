@@ -96,18 +96,27 @@
 
         },
         methods: {
+            /**
+             * 点击【新增】
+             */
             add() {
                 let _this = this;
                 _this.chapter = {};
                 $("#form-modal").modal("show");
             },
 
+            /**
+             * 点击【编辑】
+             */
             edit(chapter) {
                 let _this = this;
                 _this.chapter = $.extend({}, chapter);
                 $("#form-modal").modal("show");
             },
 
+            /**
+             * 列表查询
+             */
             list(page) {
                 let _this = this;
                 Loading.show();
@@ -116,7 +125,6 @@
                     size: _this.$refs.pagination.size,
                 }).then((response)=>{
                     Loading.hide();
-                    console.log("查询大章列表结果：", response);
                     let resp = response.data;
                     _this.chapters = resp.content.list;
                     _this.$refs.pagination.render(page, resp.content.total);
@@ -124,20 +132,22 @@
                 })
             },
 
+            /**
+             * 点击【保存】
+             */
             save(page) {
                 let _this = this;
 
                 // 保存校验
-                // if (!Validator.require(_this.chapter.name, "名称")
-                //     || !Validator.require(_this.chapter.courseId, "课程ID")
-                //     || !Validator.length(_this.chapter.courseId, "课程ID", 1, 8)) {
-                //     return;
-                // }
+                if (!Validator.require(_this.chapter.name, "名称")
+                    || !Validator.require(_this.chapter.courseId, "课程ID")
+                    || !Validator.length(_this.chapter.courseId, "课程ID", 1, 8)) {
+                    return;
+                }
 
                 Loading.show();
                 _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save', _this.chapter).then((response)=>{
                     Loading.hide();
-                    console.log("保存大章列表结果：", response);
                     let resp = response.data;
                     if (resp.success) {
                         $("#form-modal").modal("hide");
@@ -149,13 +159,15 @@
                 })
             },
 
+            /**
+             * 点击【删除】
+             */
             del(id) {
                 let _this = this;
                 Confirm.show("删除大章后不可恢复，确认删除？", function () {
                     Loading.show();
                     _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id).then((response)=>{
                         Loading.hide();
-                        console.log("删除大章列表结果：", response);
                         let resp = response.data;
                         if (resp.success) {
                             _this.list(1);
@@ -163,31 +175,6 @@
                         }
                     })
                 });
-
-                // Swal.fire({
-                //   title: '确认删除？',
-                //   text: "删除后不可恢复，确认删除？",
-                //   icon: 'warning',
-                //   showCancelButton: true,
-                //   confirmButtonColor: '#3085d6',
-                //   cancelButtonColor: '#d33',
-                //   confirmButtonText: '确认!'
-                // }).then((result) => {
-                //   if (result.value) {
-                //     Loading.show();
-                //     _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id).then((response)=>{
-                //       Loading.hide();
-                //       console.log("删除大章列表结果：", response);
-                //       let resp = response.data;
-                //       if (resp.success) {
-                //         _this.list(1);
-                //         Toast.success("删除成功！");
-                //       }
-                //     })
-                //
-                //   }
-                // })
-
             }
         }
     }
