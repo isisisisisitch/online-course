@@ -32,7 +32,7 @@ public class LogAspect {
     private final static Logger LOG = LoggerFactory.getLogger(LogAspect.class);
 
     /** 定义一个切点 */
-    @Pointcut("execution(public * com.course.*.controller..*Controller.*(..))")
+    @Pointcut("execution(public * ca.bytetube.*.controller..*Controller.*(..))")
     public void controllerPointcut() {}
 
     @Before("controllerPointcut()")
