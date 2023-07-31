@@ -1,4 +1,4 @@
-package ca.bytetube.business.controller.admin;
+package ca.bytetube.${module}.controller.admin;
 
 import ca.bytetube.server.dto.${Domain}Dto;
 import ca.bytetube.server.dto.PageDto;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 public class ${Domain}Controller {
 
     private static final Logger LOG = LoggerFactory.getLogger(${Domain}Controller.class);
-    public static final String BUSINESS_NAME = "大章";
+    public static final String BUSINESS_NAME = "${tableNameCn}";
 
     @Resource
     private ${Domain}Service ${domain}Service;
