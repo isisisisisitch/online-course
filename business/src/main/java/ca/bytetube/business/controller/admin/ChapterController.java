@@ -1,16 +1,16 @@
 package ca.bytetube.business.controller.admin;
 
-import ca.bytetube.server.domain.Chapter;
+
 import ca.bytetube.server.dto.ChapterDto;
 import ca.bytetube.server.dto.PageDto;
 import ca.bytetube.server.dto.ResponseDto;
 import ca.bytetube.server.service.ChapterService;
+import ca.bytetube.server.util.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @RestController
 @RequestMapping("/admin/chapter")
@@ -33,6 +33,12 @@ public class ChapterController {
     @PostMapping("/save")
     public ResponseDto save(@RequestBody ChapterDto chapterDto) {
         LOG.info("chapterDto: {}", chapterDto);
+
+        // 保存校验
+        ValidatorUtil.require(chapterDto.getName(), "名称");
+        ValidatorUtil.require(chapterDto.getCourseId(), "课程ID");
+        ValidatorUtil.length(chapterDto.getCourseId(), "课程ID", 1, 8);
+
         ResponseDto responseDto = new ResponseDto();
         chapterService.save(chapterDto);
         responseDto.setContent(chapterDto);
