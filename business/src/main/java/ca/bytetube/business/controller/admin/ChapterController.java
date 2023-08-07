@@ -1,7 +1,7 @@
 package ca.bytetube.business.controller.admin;
 
-
 import ca.bytetube.server.dto.ChapterDto;
+import ca.bytetube.server.dto.ChapterPageDto;
 import ca.bytetube.server.dto.PageDto;
 import ca.bytetube.server.dto.ResponseDto;
 import ca.bytetube.server.service.ChapterService;
@@ -26,10 +26,11 @@ public class ChapterController {
      * 列表查询
      */
     @PostMapping("/list")
-    public ResponseDto list(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody ChapterPageDto chapterPageDto) {
         ResponseDto responseDto = new ResponseDto();
-        chapterService.list(pageDto);
-        responseDto.setContent(pageDto);
+        ValidatorUtil.require(chapterPageDto.getCourseId(), "课程ID");
+        chapterService.list(chapterPageDto);
+        responseDto.setContent(chapterPageDto);
         return responseDto;
     }
 
