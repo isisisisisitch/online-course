@@ -36,7 +36,7 @@
                             <a href="#" class="blue">{{course.name}}</a>
                         </h3>
                         <p>
-                            <span class="blue bolder bigger-150">{{course.price}}&nbsp;<i class="fa fa-rmb"></i></span>&nbsp;
+                            <span class="blue bolder bigger-150">{{course.price}}&nbsp;<i class="fa fa-usd"></i></span>&nbsp;
                         </p>
                         <p>{{course.summary}}</p>
                         <p>

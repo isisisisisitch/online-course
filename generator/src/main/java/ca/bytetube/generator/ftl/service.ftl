@@ -58,20 +58,24 @@ public class ${Domain}Service {
     }
 
     /**
-     * 新增
-     */
+    * 新增
+    */
     private void insert(${Domain} ${domain}) {
-        Date now = new Date();
-        <#list fieldList as field>
-            <#if field.nameHump=='createdAt'>
-        ${domain}.setCreatedAt(now);
-            </#if>
-            <#if field.nameHump=='updatedAt'>
-        ${domain}.setUpdatedAt(now);
-            </#if>
-        </#list>
-        ${domain}.setId(UuidUtil.getShortUuid());
-        ${domain}Mapper.insert(${domain});
+    <#list typeSet as type>
+        <#if type=='Date'>
+            Date now = new Date();
+        </#if>
+    </#list>
+    <#list fieldList as field>
+        <#if field.nameHump=='createdAt'>
+            ${domain}.setCreatedAt(now);
+        </#if>
+        <#if field.nameHump=='updatedAt'>
+            ${domain}.setUpdatedAt(now);
+        </#if>
+    </#list>
+    ${domain}.setId(UuidUtil.getShortUuid());
+    ${domain}Mapper.insert(${domain});
     }
 
     /**
