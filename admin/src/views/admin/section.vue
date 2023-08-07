@@ -20,7 +20,7 @@
                 <th>ID</th>
                 <th>标题</th>
                 <th>课程</th>
-                <th>章</th>
+                <th>大章</th>
                 <th>视频</th>
                 <th>时长</th>
                 <th>收费</th>
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">章</label>
+                                <label class="col-sm-2 control-label">大章</label>
                                 <div class="col-sm-10">
                                     <input v-model="section.chapterId" class="form-control">
                                 </div>
@@ -122,7 +122,7 @@
     import Pagination from "../../components/pagination";
     export default {
         components: {Pagination},
-        name: "section",
+        name: "business-section",
         data: function() {
             return {
                 section: {},
