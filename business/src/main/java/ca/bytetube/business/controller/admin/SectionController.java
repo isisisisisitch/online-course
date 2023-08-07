@@ -3,6 +3,7 @@ package ca.bytetube.business.controller.admin;
 import ca.bytetube.server.dto.SectionDto;
 import ca.bytetube.server.dto.PageDto;
 import ca.bytetube.server.dto.ResponseDto;
+import ca.bytetube.server.dto.SectionPageDto;
 import ca.bytetube.server.service.SectionService;
 import ca.bytetube.server.util.ValidatorUtil;
 import org.slf4j.Logger;
@@ -25,10 +26,12 @@ public class SectionController {
      * 列表查询
      */
     @PostMapping("/list")
-    public ResponseDto list(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody SectionPageDto sectionPageDto) {
         ResponseDto responseDto = new ResponseDto();
-        sectionService.list(pageDto);
-        responseDto.setContent(pageDto);
+        ValidatorUtil.require(sectionPageDto.getCourseId(), "课程ID");
+        ValidatorUtil.require(sectionPageDto.getChapterId(), "大章ID");
+        sectionService.list(sectionPageDto);
+        responseDto.setContent(sectionPageDto);
         return responseDto;
     }
 
