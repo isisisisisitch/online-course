@@ -1,7 +1,6 @@
 package ca.bytetube.business.controller.admin;
 
 import ca.bytetube.server.dto.SectionDto;
-import ca.bytetube.server.dto.PageDto;
 import ca.bytetube.server.dto.ResponseDto;
 import ca.bytetube.server.dto.SectionPageDto;
 import ca.bytetube.server.service.SectionService;
@@ -41,7 +40,6 @@ public class SectionController {
     @PostMapping("/save")
     public ResponseDto save(@RequestBody SectionDto sectionDto) {
         // 保存校验
-        ValidatorUtil.require(sectionDto.getId(), "ID");
         ValidatorUtil.require(sectionDto.getTitle(), "标题");
         ValidatorUtil.length(sectionDto.getTitle(), "标题", 1, 50);
         ValidatorUtil.length(sectionDto.getVideo(), "视频", 1, 200);
