@@ -45,6 +45,9 @@
                             <span class="badge badge-info">时长：{{course.time}}</span>
                         </p>
                         <p>
+                            <button v-on:click="toChapter(course)" class="btn btn-white btn-xs btn-info btn-round">
+                                大章
+                            </button>&nbsp;
                             <button v-on:click="edit(course)" class="btn btn-white btn-xs btn-info btn-round">
                                 编辑
                             </button>&nbsp;
@@ -194,7 +197,7 @@
     export default {
         components: {Pagination},
         name: "business-course",
-        data: function() {
+        data: function () {
             return {
                 course: {},
                 courses: [],
@@ -203,7 +206,7 @@
                 COURSE_STATUS: COURSE_STATUS,
             }
         },
-        mounted: function() {
+        mounted: function () {
             let _this = this;
             _this.$refs.pagination.size = 5;
             _this.list(1);
@@ -239,7 +242,7 @@
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/list', {
                     page: page,
                     size: _this.$refs.pagination.size,
-                }).then((response)=>{
+                }).then((response) => {
                     Loading.hide();
                     let resp = response.data;
                     _this.courses = resp.content.list;
@@ -265,7 +268,7 @@
                 }
 
                 Loading.show();
-                _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/save', _this.course).then((response)=>{
+                _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/save', _this.course).then((response) => {
                     Loading.hide();
                     let resp = response.data;
                     if (resp.success) {
@@ -285,7 +288,7 @@
                 let _this = this;
                 Confirm.show("删除课程后不可恢复，确认删除？", function () {
                     Loading.show();
-                    _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/course/delete/' + id).then((response)=>{
+                    _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/course/delete/' + id).then((response) => {
                         Loading.hide();
                         let resp = response.data;
                         if (resp.success) {
@@ -294,6 +297,15 @@
                         }
                     })
                 });
+            },
+
+            /**
+             * 点击【大章】
+             */
+            toChapter(course) {
+                let _this = this;
+                SessionStorage.set("course", course);
+                _this.$router.push("/business/chapter");
             }
         }
     }
