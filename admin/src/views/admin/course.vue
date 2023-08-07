@@ -36,13 +36,13 @@
                             <a href="#" class="blue">{{course.name}}</a>
                         </h3>
                         <p>
-                            <span class="blue bolder bigger-150">{{course.price}}&nbsp;<i class="fa fa-usd"></i></span>&nbsp;
+                            <span class="blue bolder bigger-150">{{course.price}}&nbsp;<i class="fa fa-rmb"></i></span>&nbsp;
                         </p>
                         <p>{{course.summary}}</p>
                         <p>
                             <span class="badge badge-info">{{course.id}}</span>
                             <span class="badge badge-info">排序：{{course.sort}}</span>
-                            <span class="badge badge-info">时长：{{course.time}}</span>
+                            <span class="badge badge-info">时长：{{course.time | formatSecond}}</span>
                         </p>
                         <p>
                             <button v-on:click="toChapter(course)" class="btn btn-white btn-xs btn-info btn-round">
@@ -197,7 +197,7 @@
     export default {
         components: {Pagination},
         name: "business-course",
-        data: function () {
+        data: function() {
             return {
                 course: {},
                 courses: [],
@@ -206,7 +206,7 @@
                 COURSE_STATUS: COURSE_STATUS,
             }
         },
-        mounted: function () {
+        mounted: function() {
             let _this = this;
             _this.$refs.pagination.size = 5;
             _this.list(1);
@@ -242,7 +242,7 @@
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/list', {
                     page: page,
                     size: _this.$refs.pagination.size,
-                }).then((response) => {
+                }).then((response)=>{
                     Loading.hide();
                     let resp = response.data;
                     _this.courses = resp.content.list;
@@ -268,7 +268,7 @@
                 }
 
                 Loading.show();
-                _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/save', _this.course).then((response) => {
+                _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/save', _this.course).then((response)=>{
                     Loading.hide();
                     let resp = response.data;
                     if (resp.success) {
@@ -288,7 +288,7 @@
                 let _this = this;
                 Confirm.show("删除课程后不可恢复，确认删除？", function () {
                     Loading.show();
-                    _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/course/delete/' + id).then((response) => {
+                    _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/course/delete/' + id).then((response)=>{
                         Loading.hide();
                         let resp = response.data;
                         if (resp.success) {
