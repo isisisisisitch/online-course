@@ -6,6 +6,7 @@ import ca.bytetube.server.domain.CourseExample;
 import ca.bytetube.server.dto.CourseContentDto;
 import ca.bytetube.server.dto.CourseDto;
 import ca.bytetube.server.dto.PageDto;
+import ca.bytetube.server.dto.SortDto;
 import ca.bytetube.server.mapper.CourseContentMapper;
 import ca.bytetube.server.mapper.CourseMapper;
 import ca.bytetube.server.mapper.my.MyCourseMapper;
@@ -68,7 +69,7 @@ public class CourseService {
         }
 
         // 批量保存课程分类
-        courseCategoryService.saveBatch(courseDto.getId(), courseDto.getCategorys());
+        courseCategoryService.saveBatch(course.getId(), courseDto.getCategorys());
     }
 
     /**
@@ -129,6 +130,27 @@ public class CourseService {
         }
         return i;
     }
+
+    /**
+     * 排序
+     * @param sortDto
+     */
+    @Transactional
+    public void sort(SortDto sortDto) {
+        // 修改当前记录的排序值
+        myCourseMapper.updateSort(sortDto);
+
+        // 如果排序值变大
+        if (sortDto.getNewSort() > sortDto.getOldSort()) {
+            myCourseMapper.moveSortsForward(sortDto);
+        }
+
+        // 如果排序值变小
+        if (sortDto.getNewSort() < sortDto.getOldSort()) {
+            myCourseMapper.moveSortsBackward(sortDto);
+        }
+    }
 }
+
 
 
