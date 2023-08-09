@@ -11,5 +11,5 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/f/**").addResourceLocations("file:/Users/dalluo/Desktop/online_course/");
     }
-    //http://127.0.0.1:9003/file/f/teacher/35zrWWBV-logo.jpg
+    //http://127.0.0.1:9003/file/f/teacher/98Op59DP-头像1.jpg
 }
