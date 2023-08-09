@@ -18,7 +18,8 @@
             <div v-for="teacher in teachers" class="col-md-3 center">
                 <div>
           <span class="profile-picture">
-            <img v-show="!teacher.image" class="editable img-responsive editable-click editable-empty" src="/ace/assets/images/avatars/profile-pic.jpg" v-bind:title="teacher.intro"/>
+            <img v-show="!teacher.image" class="editable img-responsive editable-click editable-empty"
+                 src="/ace/assets/images/avatars/profile-pic.jpg" v-bind:title="teacher.intro"/>
             <img v-show="teacher.image" class="media-object" v-bind:src="teacher.image" v-bind:title="teacher.intro"/>
           </span>
 
@@ -63,7 +64,8 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">表单</h4>
                     </div>
                     <div class="modal-body">
@@ -119,16 +121,17 @@
 
 <script>
     import Pagination from "../../components/pagination";
+
     export default {
         components: {Pagination},
         name: "business-teacher",
-        data: function() {
+        data: function () {
             return {
                 teacher: {},
                 teachers: [],
             }
         },
-        mounted: function() {
+        mounted: function () {
             let _this = this;
             _this.$refs.pagination.size = 5;
             _this.list(1);
@@ -164,7 +167,7 @@
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/teacher/list', {
                     page: page,
                     size: _this.$refs.pagination.size,
-                }).then((response)=>{
+                }).then((response) => {
                     Loading.hide();
                     let resp = response.data;
                     _this.teachers = resp.content.list;
@@ -193,7 +196,7 @@
                 }
 
                 Loading.show();
-                _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/teacher/save', _this.teacher).then((response)=>{
+                _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/teacher/save', _this.teacher).then((response) => {
                     Loading.hide();
                     let resp = response.data;
                     if (resp.success) {
@@ -213,7 +216,7 @@
                 let _this = this;
                 Confirm.show("删除讲师后不可恢复，确认删除？", function () {
                     Loading.show();
-                    _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/teacher/delete/' + id).then((response)=>{
+                    _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/teacher/delete/' + id).then((response) => {
                         Loading.hide();
                         let resp = response.data;
                         if (resp.success) {
@@ -224,13 +227,13 @@
                 });
             },
 
-            uploadImage () {
+            uploadImage() {
                 let _this = this;
                 let formData = new window.FormData();
                 // key："file"必须和后端controller参数名一致
                 formData.append('file', document.querySelector('#file-upload-input').files[0]);
                 Loading.show();
-                _this.$ajax.post(process.env.VUE_APP_SERVER + '/file/admin/upload', formData).then((response)=>{
+                _this.$ajax.post(process.env.VUE_APP_SERVER + '/file/admin/upload', formData).then((response) => {
                     Loading.hide();
                     let resp = response.data;
                     let image = resp.content;
