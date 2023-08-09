@@ -1,9 +1,6 @@
 package ca.bytetube.business.controller.admin;
 
-import ca.bytetube.server.dto.CourseCategoryDto;
-import ca.bytetube.server.dto.CourseDto;
-import ca.bytetube.server.dto.PageDto;
-import ca.bytetube.server.dto.ResponseDto;
+import ca.bytetube.server.dto.*;
 import ca.bytetube.server.service.CourseCategoryService;
 import ca.bytetube.server.service.CourseService;
 import ca.bytetube.server.util.ValidatorUtil;
@@ -76,4 +73,20 @@ public class CourseController {
         responseDto.setContent(dtoList);
         return responseDto;
     }
+
+    @GetMapping("/find-content/{id}")
+    public ResponseDto findContent(@PathVariable String id) {
+        ResponseDto responseDto = new ResponseDto();
+        CourseContentDto contentDto = courseService.findContent(id);
+        responseDto.setContent(contentDto);
+        return responseDto;
+    }
+
+    @PostMapping("/save-content")
+    public ResponseDto saveContent(@RequestBody CourseContentDto contentDto) {
+        ResponseDto responseDto = new ResponseDto();
+        courseService.saveContent(contentDto);
+        return responseDto;
+    }
 }
+
