@@ -1,4 +1,4 @@
-package ca.bytetube.config;
+package ca.bytetube.file.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
